@@ -1,0 +1,394 @@
+---
+  title: "datacleaning-two-shots"
+author: "Hannah Lunkenheimer"
+date: "`r Sys.Date()`"
+output: html_document
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#loading libraries
+library(readr)
+library(tidyverse)
+library(dplyr)
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+  
+  ```{r cars}
+#reading in our data
+d_all <- read_csv("basketball_transcripts.csv")
+```
+
+
+```{r}
+#saveRDS(d_all, 'Baller_p1.rds')
+(d_all, 'Baller_p1.rds')
+
+d_all <- Baller_p1
+```
+
+
+```{r}
+d_all <- readRDS('Baller_p1.rds')
+
+#d_all <- read.csv('basketball_transcripts.csv')
+```
+
+
+```{r}
+#using the subset function to eliminate the interviewers/moderators
+d_all1 <-d_all %>% 
+  filter(Speaker != "MODERATOR" & Speaker != "Questioner")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "DOC RIVERS" & Speaker != "COACH CREAN")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COACH RIVERS" & Speaker != "COACH MARTIN")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "THE MODERATOR" & Speaker != "ADAM SILVER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "MAYA MOORE" & Speaker != "DIANA TAURASI")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COMMISSIONER SILVER" & Speaker != "COACH SELF")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COACH McCAFFERY" & Speaker != "COACH DONOVAN")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "LEE MARTIN" & Speaker != "GREG MILLER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "JERRY COLANGELO" & Speaker != "MIKE KRZYZEWSKI")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "CAROLYN PECK" & Speaker != "ELENA DELLE DONNE")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "LIN DUNN" & Speaker != "REBECCA LOBO")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "SANDY BRONDELLO" & Speaker != "IRINA PAVLOVA")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COACH KELSEY" & Speaker != "COACH CALIPARI")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COACH IZZO" & Speaker != "COACH BLUDER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "JOHN CALIPARI" & Speaker != "COACH MERCHANT")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COACH GRIER" & Speaker != "COACH WILLIAMS")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "LISA BLUDER" & Speaker != "BETHANY DOOLITTLE")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COACH MCCAFFERY" & Speaker != "COACH RYAN")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "JIM DELANEY" & Speaker != "COACH HENDERSON")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "JIM DELANY" & Speaker != "TIM SIMMONS")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COACH BREY" & Speaker != "COACH HURLEY")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "FRAN McCAFFERY" & Speaker != "BILL SELF")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "HANNER MOSQUERA�PEREA" & Speaker != "Q")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "STEVE BALLMER" & Speaker != "MICHAEL COOPER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "ANGEL McCAUGHTRY" & Speaker != "LAUREL RICHIE")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "DAVID LEVY" & Speaker != "JOHN SKIPPER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "TED LEONSIS" & Speaker != "MATTHEW MITCHELL")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "BOB CHIPMAN" & Speaker != "PLAYER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "CLIFF ALEXANDER" & Speaker != "FRANK MASON III")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "JEREMY LICKTEIG" & Speaker != "KOREY FISHER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "NICK ZEISLOFT" & Speaker != "TOM CREAN")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "HANNER MOSQUERA�PEREA" & Speaker != "COLLIN HARTMAN")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "HANNER MOSQUERA�PEREA" & Speaker != "JAMES BLACKMON, JR.")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "ROBERT JOHNSON" & Speaker != "EARL GRANT")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "KEVIN OLLIE" & Speaker != "JIM CHRISTIANT")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "BOB HUGGINS" & Speaker != "JIM CHRISTIAN")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "PAUL HEWITT" & Speaker != "DAN SHOEMAKER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "BILLY KENNEDY" & Speaker != "ARCHIE MILLER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "CRAIG NEAL" & Speaker != "STEVE HAWKINS")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "CHRIS MACK" & Speaker != "TIM FLOYD")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "DAN MUNSON" & Speaker != "DAVE WOJCIK")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "LORENZO ROMAR" & Speaker != "RYAN BURTON")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "PERRY ELLIS" & Speaker != "ALAN WILLIAMS")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "JOHN GREEN" & Speaker != "DAN GAVITT")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "DAVE WORLOCK" & Speaker != "UNIDENTIFIED SPEAKER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "BRANNEN GREENE" & Speaker != "KEVIN BAGGETT")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "XAVIER LUNDY" & Speaker != "EMMITT HOLT")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "ROB JOHNSON" & Speaker != "COACH ROBIC")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "STANFORD ROBINSON" & Speaker != "COACH BO RYAN")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COLIN HARTMAN" & Speaker != "BO RYAN")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "BOBBIE KELSEY" & Speaker != "ALLY DISTERHOFT")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "SAMANTHA LOGIC" & Speaker != "DAVID WORLOCK")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "JENNY HANSEN" & Speaker != "HANNER PEREA")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COMMISSIONER�SELECT SANKEY" & Speaker != "HERB VINCENT")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "NICK ZEPPOS" & Speaker != "STEVE VASTURIA")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "NICK ZEPPOS" & Speaker != "STEVE VASTURIA")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "HANNER MOSQUERA�PEREA" & Speaker != "COMMISSIONER�SELECT SANKEY")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "ZACH AUGUSTE" & Speaker != "DRU HANCOCK")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "UNIDENTIFIED ATHLETE" & Speaker != "DR. CROW")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "JOSH GASSER" & Speaker != "NIGEL HAYES")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "ANNE DONOVAN" & Speaker != "LACHINA ROBINSON")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "JENNY BOUCEK" & Speaker != "DAN HUGHES")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "FRED WILLIAMS" & Speaker != "AMANDA ZAHUI B." & Speaker != "ELIZABETH WILLIAMS" & Speaker != "RESHANDA GRAY")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "INDRA NOOYI" & Speaker != "MIKE BASS" & Speaker != "WEI HONG-CHEN" & Speaker != "COACH SCHNEIDER")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "SHEAHON ZENGER" & Speaker != "BILLY DONOVAN" & Speaker != "JEREMY FOLEY" & Speaker != "BOB MYERS")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "TIM CHANEY" & Speaker != "COACH WHITE" & Speaker != "DAVE WARLOCK" & Speaker != "J.D. COLLINS")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "RICK BYRD" & Speaker != "COACH KERR" & Speaker != "FRED WHITFIELD" & Speaker != "HON. DAN CLODFELTER" & Speaker != "HON. PAT McCRORY")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "STEVE MARTIN" & Speaker != "TREVOR FULLER" & Speaker != "COLE ALDRICH" & Speaker != "MARK HOLLIS" & Speaker != "PRESIDENT SIMON")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "COACH BLATT" & Speaker != "JOSH ROSEN" & Speaker != "COLE ALDRICH" & Speaker != "MARK HOLLIS" & Speaker != "PRESIDENT SIMON")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "BRANDON SCHNEIDER" & Speaker != "Â STEVE BALLMER" & Speaker != "BRIDGET WOODRUFF" & Speaker != "DR. JEANETTE KOWALIK" & Speaker != "VITTO BROWN")
+
+d_all1 <-d_all1 %>% 
+  filter(Speaker != "Â STEVE BALLMER" 
+         & Speaker != "JOHNNY JONES" 
+         & Speaker != "COACH CALDWELL" 
+         & Speaker != "COACH GARD" 
+         & Speaker != "GREG GARD")
+
+
+#d_all1 <- d_all1[-c(11),]
+#d_all1 <- d_all1[-c(28),]
+#d_all1 <- d_all1[-c(52),]
+# had special charecters and needed to remove this way 
+
+
+#once you've gone through and eliminated the names, you might notice funky rows that need to be taken out of the dataaframe. use this code to do so
+#d_all2 <- d_all1[-c(1:15),]
+
+#once we're finished we'll use this code to export a new, cleaned, CSV
+#write.csv(d_all,"\\basketball_transcripts_cleaned.csv", row.names = FALSE)
+
+
+```
+
+```{r}
+all_filters = c(
+  'Â STEVE BALLMER',
+  'COACH POPOVICH',
+  'CRAIG MILLER',
+  'TOM IZZO',
+  'COACH SUZY MERCHANT',
+  'MAX BIELFELDT',
+  'COACH CHRYST',
+  'REPLACENAME',
+  'COACH BILL SELF',
+  'HARRISON NIEGO',
+  'BARRY ALVAREZ',
+  'JOE CASTIGLIONE',
+  'LANDEN LUCAS',
+  'CHRIS DAWSON',
+  'RICK NIXON',
+  'COACH PIKIELL',
+  'KEVIN LORINCZ',
+  'PAT HOBBS',
+  'PRESIDENT BARCHI',
+  'HON. ERIC GARCETTI',
+  'KATHY SCHLOESSMAN',
+  'KEVIN HARLAN',
+  'JOHN HITT',
+  'KATIE ABRAHAMSON-HENDERSON',
+  'PRESIDENT JOHN HITT',
+  'IMANI BOYETTE',
+  'JONQUEL JONES',
+  'TIFFANY MITCHELL',
+  'CURT MILLER',
+  'REPLACENAME',
+  'COACH HENSON',
+  'LYNN HICKEY',
+  'LISA BORDERS', 
+  'DAWN STALEY',
+  'SHERYL SWOOPES',
+  'CAROL CALLAN',
+  'GENO AURIEMMA',
+  'GREG GRULIKOWSKI',
+  'RAYMOND RIDDER',
+  'JOE BORGIA',
+  'RICK KAMLA',
+  'CAROL CALLAN',
+  'MAX BIEFELDT',
+  'HEAD COACH CREAN',
+  'RANDY FOYE',
+  'VAL ACKERMAN',
+  'SAM PRESTI',
+  'NIKKI FARGAS',
+  'AMANDA BUTLER',
+  'MADAM WANG JIANJUN',
+  'CINDY SIMON SKJODT',
+  'G. FREDERICK GLASS',
+  'JAMES MORRIS',
+  'PRESIDENT McROBBIE',
+  'TERI MOREN'
+)
+
+#d_all1 <- d_filtered[-c(1),]
+#_all1 <- d_all1[-c(2:7),]
+#d_all1 <- d_all1[-c(3),]
+#d_all1 <- d_all1[-c(7),]
+#d_all1 <- d_all1[-c(17,23,25,43,50,53,54),]
+#d_all1 <- d_all1[-c(17,23,25,43,50,53,),]
+## tiffany michel line 181
+```
+
+
+
+```{r}
+# Filter them all out in one go:
+
+d_filtered = d_all1 %>%
+  filter(!Speaker %in% all_filters)
+
+# the in operator (%in%) vectorized and it does it all at the same time! 
+
+```
+
+
+```{r}
+all_filters = c(
+  'Â STEVE BALLMER',
+  'MAX BIEFELDT',
+  'HEAD COACH CREAN',
+  'RANDY FOYE',
+  'VAL ACKERMAN',
+  'SAM PRESTI',
+  'NIKKI FARGAS',
+  'AMANDA BUTLER',
+  'MADAM WANG JIANJUN',
+  'CINDY SIMON SKJODT',
+  'G. FREDERICK GLASS',
+  'JAMES MORRIS',
+  'PRESIDENT McROBBIE',
+  'TERI MOREN',
+)
+
+d_filtered1 = d_filtered %>%
+  filter(!Speaker %in% all_filters)
+
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+  
+  ```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
